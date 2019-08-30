@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,17 +46,11 @@ public class BoardController {
 
 	// 02_02. 게시글 작성처리
 	@RequestMapping(value = "insert.do", method = RequestMethod.POST)
-	public ModelAndView insert(BoardVO boardVO) throws Exception {
-		System.out.println(boardVO.getContent());
-		
-		Date date = new Date();
-		
+	public ModelAndView insert(@ModelAttribute BoardVO boardVO) throws Exception {
 		boardService.insert(boardVO);
-		 
 		
-
 		String url = "redirect:/board/list.do";
-		
+		System.out.println("Test");
 		return new ModelAndView(url); 
 		
 	}
