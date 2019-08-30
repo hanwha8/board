@@ -41,7 +41,7 @@ function submitbtn() {
     });
 </script>
 </head>
-<body>
+<body style="text-align: center">
        <h2>게시글 작성</h2>
        <form name="form1" method="post" action="${path}/example/board/insert.do">
            <div>
@@ -56,22 +56,17 @@ function submitbtn() {
                <button type="submit" id="btnSave">확인</button>
            </div>
        </form>
-       <h2>게시글 목록</h2>
-       <table border="1" width="600px">
-             <tr>
-                    <th>내용</th>
-                    <th>이름</th>
-                    <th>작성일</th>
-             </tr>
-             <c:forEach var="row" items="${list}">
-                    <tr>
-                           <td><a href="${path}/example/board/view.do?bno=${row.bno}">${row.content}</a></td>
-                           <td>${row.writer}</td>
-                           <td><fmt:formatDate value="${row.regdate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                    </tr>
-             </c:forEach>
-       </table>
+       <br><br><br>
        
+       <h2>게시글 목록</h2>
+       <c:forEach var="row" items="${list}">
+       	<table style="border-top:1px solid; border-right:1px; border-left:1px; border-bottom:1px" width="100%">
+       		<tr><td colspan='2'>${row.writer}</td></tr>
+       		<tr><td colspan='2' style="height: 150px">${row.content}</td></tr>
+       		<tr><td></td><td style="text-align:right">${row.regdate}</td></tr>
+       </table>
+       </c:forEach>
+  
 </body>
 <!-- 
 <script type="text/javascript">
