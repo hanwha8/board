@@ -13,12 +13,23 @@
 <title>팔조 게시판</title>
 <script>
 
+
+$(document).ready(function(){
+   
+   setInterval("submitbtn()",3000);
+    $("#btnSave").click(function(){
+        // 페이지 주소 변경(이동)
+        location.href = "${path}/example/board/write.do";
+    });
+});
+
 function submitbtn() {
+	
+	   console.log("ajax호출");
        $.ajax({
              url: "http://localhost:8080/example/board/project/hello",
              type:"POST",
              dataType:"json",
-             timeout: 3000,
              crossDomain: true,
              success:function(data){
                   var input = data;
@@ -27,12 +38,16 @@ function submitbtn() {
                   var location = ""
                   var content="";
                   
-                  for(var i=0; i<input.length; i++){
+                  console.log("ajax호출2");
+                  console.log(input[0].writer);
+                  for(var i=input.length-1; i>=0; i--){
+                	  	console.log("호출이양")
                 		writer = input[i].writer;
                 		location = input[i].title;
                 		content = input[i].content;
                 		 $('#mytable > tbody:last').append('<tr> <td>'+writer+'</td> <td>'+location+'</td>'+'<td>'+content+'</td> </tr>');
                   }
+                  
                   
              },
              error:function(request,status,error){
@@ -44,14 +59,6 @@ function submitbtn() {
 
 
 
-    $(document).ready(function(){
-       console.log("tesst")
-       submitbtn();
-        $("#btnSave").click(function(){
-            // 페이지 주소 변경(이동)
-            location.href = "${path}/example/board/write.do";
-        });
-    });
 </script>
 </head>
 <body style="text-align: center">
