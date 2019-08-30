@@ -17,11 +17,11 @@ public class ProjectController {
 	
 	@Autowired
 	BoardService boardService;
-	@RequestMapping(value ="/hello", method = RequestMethod.POST)
+	@RequestMapping(value ="/hello", method = {RequestMethod.POST})
 	public List<BoardVO> list() throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list",boardService.list());
-		
+		System.out.println("log");
 		return boardService.list();
 	}
 	
