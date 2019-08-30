@@ -28,6 +28,7 @@ public class BoardController {
 	
 	
 	// 01. 게시글 목록
+	//board/list.do에서 post 방식으로 전송된 요청만 처리하겠다.
 	@RequestMapping(value = "list.do", method = RequestMethod.POST)
 	public ModelAndView list() throws Exception {
 		// ModelAndView - 모델과 뷰

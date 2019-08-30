@@ -12,15 +12,28 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <title>팔조 게시판</title>
 <script>
+
 function submitbtn() {
        $.ajax({
              url: "http://localhost:8080/example/board/project/hello",
              type:"POST",
              dataType:"json",
+             timeout: 3000,
              crossDomain: true,
              success:function(data){
-                    console.log(data);
-                    
+                  var input = data;
+                  
+                  var writer="";
+                  var location = ""
+                  var content="";
+                  
+                  for(var i=0; i<input.length; i++){
+                		writer = input[i].writer;
+                		location = input[i].title;
+                		content = input[i].content;
+                		 $('#mytable > tbody:last').append('<tr> <td>'+writer+'</td> <td>'+location+'</td>'+'<td>'+content+'</td> </tr>');
+                  }
+                  
              },
              error:function(request,status,error){
                     alert("실패");
@@ -60,24 +73,20 @@ function submitbtn() {
        <br><br><br>
        
        <h2>게시글 목록</h2>
-<<<<<<< HEAD
-       <table border="1" width="600px">
-             <c:forEach var="row" items="${list}">
-                    <tr>
-                           <td><a href="${path}/example/board/view.do?bno=${row.bno}">${row.content}</a></td>
-                           <td>${row.writer}</td>
-                           <td><fmt:formatDate value="${row.regdate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                    </tr>
-             </c:forEach>
-=======
-       <c:forEach var="row" items="${list}">
-       	<table style="border-top:1px solid; border-right:1px; border-left:1px; border-bottom:1px" width="100%">
-       		<tr><td colspan='2'>${row.writer}</td></tr>
-       		<tr><td colspan='2' style="height: 150px">${row.content}</td></tr>
-       		<tr><td></td><td style="text-align:right">${row.regdate}</td></tr>
->>>>>>> d3cf329fc04689437e4ef6557fe16fea6f27eec3
-       </table>
-       </c:forEach>
+
+      <table id="mytable" border="1" cellspacing="0">
+	  			<tr>
+	    			<th>글쓴이</th>
+	    			<th>위치정보</th>
+	    			<th>내용</th>
+	  			</tr>
+  		 <tbody>
+  		 	
+  	
+  	
+  		 </tbody>
+	</table>
+       
   
 </body>
 </html>
